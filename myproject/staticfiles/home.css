@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: #1a1a1a;
+    color: black;
+}
+
+/* Body and Parent Container */
+body {
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #526697, #71a094);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px; /* Adjusted padding for better alignment */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 60px; /* Reduced height */
+    position: fixed; /* Changed from sticky to fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+}
+
+.brand-name {
+    font-family: 'Cursive', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Right Section */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #cce7e3;
+}
+
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    transition: transform 0.3s ease;
+}
+
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Dark Mode Toggle Button */
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-dark-mode:hover {
+    transform: scale(1.2);
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    background: linear-gradient(to right, #526697, #71a094);
+    color: white;
+    padding: 20px 15px; /* Reduced padding */
+    margin-top: 70px; /* Adjusted for fixed navbar */
+    max-width: 600px; /* Added a max width */
+    border-radius: 10px; /* Optional for rounded corners */
+    margin-left: auto;
+    margin-right: auto; /* Center alignment */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+.welcome-section h1 {
+    font-size: 28px; /* Reduced font size */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 16px; /* Reduced font size */
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+/* Post Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 600px;
+}
+
+
+/* Post Container */
+.post {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Add a white container behind the post */
+.post::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: white; /* White background behind the post */
+    border-radius: 10px;
+    z-index: -1; /* Place it behind the content */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Mode Post Card */
+body.dark-mode .post-card {
+    background-color: #333;
+    color: #f5f5f5;
+}
+
+/* Post Image Styling */
+.post-image {
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+/* Like & Save Buttons */
+.like-btn, .save-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: gray;
+    transition: color 0.3s, transform 0.3s ease;
+}
+
+.like-btn:hover, .save-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Liked State for the Like Button */
+.liked {
+    color: pink;
+}
+
+/* Saved State for the Save Button */
+.saved {
+    color: blue;
+}
+
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-icon {
+        height: 35px;
+        width: 35px;
+    }
+
+    .welcome-section h1 {
+        font-size: 28px;
+    }
+
+    .welcome-section p {
+        font-size: 16px;
+    }
+
+    .post-card {
+        padding: 15px;
+    }
+}
+
+.post-video {
+    width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+

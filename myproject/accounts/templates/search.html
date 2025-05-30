@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daygram - Search by hashtags and explore categories.">
+    <title>Search - Daygram</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'search.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <script src="https://kit.fontawesome.com/d278e16513.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="left-section">
+        <img src="{% static 'img/l7.jpeg' %}" alt="Daygram Logo" class="logo">
+        <span class="brand-name">DAYGRAM</span>
+    </div>
+
+    <div class="right-section">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}"><img src="{% static 'img/home6.jpg' %}" alt="Home" class="nav-icon"></a></li>
+            <li><a href="{% url 'chatbot' %}"><img src="{% static 'img/bot.jpeg' %}" alt="Chatbot" class="nav-icon chatbot-icon"></a></li>
+            <li><a href="{% url 'games' %}"><img src="{% static 'img/games.jpeg' %}" alt="Games" class="nav-icon games-icon"></a></li>
+            <li><a href="{% url 'post' %}"><img src="{% static 'img/post.jpeg' %}" alt="Post" class="nav-icon post-icon"></a></li>
+            <li><a href="{% url 'profile' user.id %}"><img src="{% static 'img/profile.jpeg' %}" alt="Profile" class="nav-icon profile-icon"></a></li>
+        </ul>
+
+        {% comment %} <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button> {% endcomment %}
+    </div>
+</nav>
+
+<div class="overlay"></div>
+
+<div class="container">
+    <div class="search-box">
+        <form method="GET" action="{% url 'search' %}">
+            <select class="category-dropdown" name="category">
+                <option value="all">All Categories</option>
+                <option value="username">Username</option>
+                <option value="food">Food</option>
+                <option value="travel">Travel</option>
+                <option value="fitness">Fitness</option>
+                <option value="technology">Technology</option>
+                <option value="fashion">Fashion</option>
+            </select>
+            <input type="text" id="search-input" placeholder="Search by hashtag or username..." name="query">
+            <button type="submit" id="search-btn"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="search-results">
+        {% if query or category %}
+            <div id="postFeed" class="post-container">
+                
+                {% if category == "username" %}
+                    {% if users %}
+                        <h2 class="result-title">User Results</h2>
+                        {% for user in users %}
+                            <div class="user-result">
+                                <span class="username">{{ user.username }}</span>
+                                <a href="{% url 'profile' user.id %}" class="view-profile-btn">View Profile</a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-results">No Users Found</p>
+                    {% endif %}
+                
+                {% else %}
+                    {% if posts %}
+                        <h2 class="result-title">Post Results</h2>
+                        {% for post in posts %}
+                            <div class="post">
+                                <div class="post-header">
+                                    <a href="{% url 'profile' post.user_profile.id %}" class="post-username">{{ post.user_profile.username }}</a>
+                                </div>
+                                
+                                {% if post.image %}
+                                    <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+                                {% elif post.video %}
+                                    <video class="post-video" controls>
+                                        <source src="{{ post.video.url }}" type="video/mp4">
+                                    </video>
+                                {% endif %}
+                                
+                                <p class="post-caption">{{ post.caption }}</p>
+                                <p class="post-category">Category: {{ post.category }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-results">No Posts Found</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const icon = document.querySelector(".toggle-dark-mode");
+        icon.textContent = document.body.classList.contains("dark-mode") ? "☀" : "🌙";
+    }
+</script>
+
+</body>
+</html>

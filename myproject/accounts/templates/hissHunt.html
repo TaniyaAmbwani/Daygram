@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiss & Hunt</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .game-container {
+            position: relative;
+            width: 600px;
+            margin: auto;
+        }
+        .title-bar {
+            background: #a56b46;
+            color: #ffcc80;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+        #score {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            font-size: 16px;
+            color: white;
+        }
+        canvas {
+            background: white;
+            display: block;
+            margin: auto;
+            border: 2px solid black;
+        }
+        #startButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #startButton:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="title-bar">
+            Hiss & Hunt
+            <span id="score">Hunted: 0 | Length: 1</span>
+        </div>
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        <button id="startButton">Start Game</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const startButton = document.getElementById("startButton");
+
+        let snake, food, direction, score, gameOver, gameRunning;
+
+        function initializeGame() {
+            snake = [{ x: 300, y: 200 }];
+            food = getRandomFoodPosition();
+            direction = { x: 20, y: 0 };
+            score = 0;
+            gameOver = false;
+            gameRunning = false;
+            document.getElementById("score").textContent = `Hunted: ${score} | Length: ${snake.length}`;
+            draw();
+        }
+
+        function getRandomFoodPosition() {
+            return {
+                x: Math.floor(Math.random() * (canvas.width / 20)) * 20,
+                y: Math.floor(Math.random() * (canvas.height / 20)) * 20
+            };
+        }
+
+        function update() {
+            if (gameOver || !gameRunning) return;
+
+            const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                food = getRandomFoodPosition();
+            } else {
+                snake.pop();
+            }
+
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height ||
+                snake.some(part => part.x === head.x && part.y === head.y)) {
+                gameOver = true;
+                gameRunning = false;
+            }
+
+            snake.unshift(head);
+            document.getElementById("score").textContent = `Hunted: ${score} | Length: ${snake.length}`;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "orange";
+            ctx.beginPath();
+            ctx.arc(food.x + 10, food.y + 10, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "cyan";
+            snake.forEach(part => {
+                ctx.beginPath();
+                ctx.arc(part.x + 10, part.y + 10, 10, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+            });
+
+            if (gameOver) {
+                ctx.fillStyle = "red";
+                ctx.font = "30px Arial";
+                ctx.fillText("Game Over!", canvas.width / 2 - 80, canvas.height / 2);
+            }
+        }
+
+        function changeDirection(event) {
+            if (!gameRunning) return;
+            const key = event.keyCode;
+            if ((key === 37 || key === 65) && direction.x === 0) direction = { x: -20, y: 0 };
+            else if ((key === 38 || key === 87) && direction.y === 0) direction = { x: 0, y: -20 };
+            else if ((key === 39 || key === 68) && direction.x === 0) direction = { x: 20, y: 0 };
+            else if ((key === 40 || key === 83) && direction.y === 0) direction = { x: 0, y: 20 };
+        }
+
+        document.addEventListener("keydown", changeDirection);
+
+        function gameLoop() {
+            update();
+            draw();
+        }
+
+        startButton.addEventListener("click", () => {
+            initializeGame();
+            gameRunning = true;
+        });
+
+        initializeGame();
+        setInterval(gameLoop, 100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Styling */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #f5f5f5;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #dfe6f6, #ebf6f3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.brand-name {
+    font-family: 'Cursive', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(12, 0, 0);
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #c4e5d6;
+}
+
+/* Icons Styling */
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%; /* Circular icon */
+    object-fit: cover;
+    border: 2px solid rgb(7,0,0);
+    transition: transform 0.3s ease;}
+
+    .nav-icon:hover {
+        transform: scale(1.1);
+        color: #c4e5d6;
+    }
+
+/* Specific Icon Borders */
+.home-icon { border: 2px solid #8C9B8F; }
+.chatbot-icon { border: 2px solid #8C9B8F; }
+.search-icon { border: 2px solid #7B8A7F; }
+.games-icon { border: 2px solid #7B8A7F; }
+.post-icon { border: 2px solid #7B8A7F; }
+
+
+/* Dark Mode Toggle */
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.toggle-dark-mode:hover {
+    transform: scale(1.1);
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #71a094; /* Navbar color separator */
+    margin-bottom: 20px;
+}
+
+body.dark-mode .profile-header {
+    background-color: #333;
+    border-bottom: 2px solid #4e8d7c;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-pic {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4e8d7c;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Follow Buttons */
+.follow-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.follow-btn {
+    background-color: #B4ADDF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.follow-btn:hover {
+    background-color: #4e6861;
+}
+
+body.dark-mode .follow-btn {
+    background-color: #58678c;
+}
+
+body.dark-mode .follow-btn:hover {
+    background-color: #60756f;
+}
+
+/* Tabs Section */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    padding: 10px 0;
+}
+
+.tab-btn {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    border: none;
+    background: none;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+.tab-content {
+    align-items: center;
+}
+
+.tab-btn:hover {
+    color: #4e6861;
+    border-bottom: 2px solid #4e8d7c;
+}
+
+body.dark-mode .tab-btn {
+    color: #f5f5f5;
+}
+
+body.dark-mode .tab-btn:hover {
+    color: #607570;
+    border-bottom: 2px solid #71a094;
+}
+
+/* Post Section */
+.post-section {
+    padding: 20px;
+}
+
+
+/* .post-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+} */
+.parent-container {
+    display: flex;
+    justify-content: center;  /* Centers content horizontally */
+    align-items: center;  /* Centers content vertically */
+    height: 100vh;  /* Takes full height of the viewport */
+    margin: 25%;  /* Removes default margin */
+}
+
+/* Post container styling */
+.post-container {  
+    display: flex;  
+    flex-direction: column; /* Stack posts vertically */
+    justify-content: center; /* Center posts vertically */
+    align-items: center; /* Center posts horizontally */
+    padding: 20px; /* Optional: Add some padding around the container */
+}
+
+/* Post card styling */
+.post-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Set to 100% to fill the container */
+    max-width: 500px; /* Limits maximum width */
+    margin: 10px 0; /* Adds vertical spacing between cards */
+    padding: 20px; /* Adds spacing inside the post */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow for better visibility */
+    border-radius: 10px; /* Optional: Smooth corners */
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Make images and videos responsive */
+.post-image, .post-video {
+    width: 100%;
+    border-radius: 10px; /* Optional: Smooth corners */
+}
+
+body.dark-mode .post-card {
+    background-color: #333;
+    color: #f5f5f5;
+}
+/* Modal Styling - Positioned Next to Button */
+.modal {
+    position: absolute; /* Ensure it positions relative to settings button */
+    display: none; /* Initially hidden */
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    min-width: 180px;
+    border: 2px solid rgb(57, 77, 109);
+}
+
+/* Position the modal next to the settings button */
+.settings-button {
+    position: relative; /* Ensures modal aligns to this */
+
+}
+.settings-option:hover {
+    transform: translateY(-1px);
+    color: #4e8d7c;
+    background-color: #4e8d7c;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+}
+
+.modal.active {
+    display: block;
+    top: 100%; /* Positions below the button */
+    right: 0; /* Aligns to the right */
+}
+
+/* Modal Content */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: rgb(255, 17, 17);
+}
+
+
+
+.close:focus {
+    color: rgb(205, 69, 69);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.settings-option {
+    margin: 10px 0;
+}
+/* .settings-option {
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+} */
+
+/* .settings-option:last-child {
+    border-bottom: none; 
+} */

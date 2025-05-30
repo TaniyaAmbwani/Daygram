@@ -1,0 +1,253 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body.dark-mode {
+    background: #1a1a1a;
+    color: #f5f5f5;
+}
+/* Body and Parent Container */
+body {
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #526697, #71a094);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+    margin-right: 10px;}
+
+.brand-name {
+    font-family: cursive;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #c4e5d6;
+}
+
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%; /* Circular icon */
+    object-fit: cover;
+    border: 2px solid white; /* Adds a border like Instagram */
+}
+.home-icon {
+    border: 2px solid #8C9B8F ; /* Adds a border like Instagram */
+}
+
+/* Chatbot Icon */
+.chatbot-icon {
+    border: 2px solid #8C9B8F ; /* Adds a border like Instagram */
+}
+
+/* Profile Icon */
+.profile-icon {
+    border: 2px solid #7B8A7F; /* Adds a border like Instagram */
+}
+
+/* Games Icon */
+.games-icon {
+    border: 2px solid #7B8A7F; /* Adds a border like Instagram */
+}
+
+/* Post Icon */
+.post-icon {
+    border: 2px solid #7B8A7F; /* Adds a border like Instagram */
+}
+
+.toggle-dark-mode:hover {
+    transform: scale(1.1);
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.brand-name {
+    font-family: cursive;
+    font-size: 24px;
+    font-weight: bold;
+    color: #f3f3f3;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category-dropdown {
+    padding: 10px;
+    border: 2px solid #526697;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#search-input {
+    padding: 10px;
+    border: 2px solid #526697;
+    border-radius: 8px;
+    font-size: 16px;
+    flex-grow: 1;
+}
+
+#search-btn {
+    padding: 10px;
+    border: none;
+    background-color: #526697;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#search-btn:hover {
+    background-color: #54766e;
+}
+
+/* Search Results */
+.search-results {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+#results-list {
+    list-style: none;
+    padding: 0;
+}
+
+#results-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#results-list li:last-child {
+    border-bottom: none;
+}
+
+.post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.post {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Add a white container behind the post */
+.post::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: white; /* White background behind the post */
+    border-radius: 10px;
+    z-index: -1; /* Place it behind the content */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Mode Post Card */
+body.dark-mode .post-card {
+    background-color: #333;
+    color: #f5f5f5;
+}
+
+/* Post Image Styling */
+.post-image {
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+}

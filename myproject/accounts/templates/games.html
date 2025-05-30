@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Flutter - Games</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'games.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="light-mode">
+    <!-- Video Background -->
+    <video autoplay muted loop id="background-video">
+        <source src="{% static 'img/gv2.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="brand">
+            <img src="{% static 'img/l7.jpeg' %}" alt="Daygram Logo" class="logo navbar-logo">
+            <span>DAYGRAM</span>
+        </div>
+        <div class="right-section">
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}"><img src="{% static 'img/home6.jpg' %}" alt="Home" class="nav-icon"></a></li>
+                <li><a href="{% url 'chatbot' %}"><img src="{% static 'img/bot.jpeg' %}" alt="Chatbot" class="nav-icon chatbot-icon"></a></li>
+                <li><a href="{% url 'post' %}"><img src="{% static 'img/post.jpeg' %}" alt="Post" class="nav-icon post-icon"></a></li>
+                <li><a href="{% url 'profile' user.id %}"><img src="{% static 'img/profile.jpeg' %}" alt="Profile" class="nav-icon profile-icon"></a></li>
+            </ul>
+            {% comment %} <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button> {% endcomment %}
+        </div>
+    </nav>
+
+    <!-- Heading Section -->
+    <section class="welcome-section">
+        <h1>🎮 Let's Flutter!</h1>
+        <!-- <p>Choose your favorite game and start the adventure!</p> -->
+    </section>
+
+    <!-- Games Grid -->
+    <div class="games-section">
+        <div class="games-grid">
+            <div class="game-card" onclick="openSkyChaser()">
+                <img src="{% static 'img/g4.png' %}" alt="Sky Chaser">
+                <h2>Sky Chaser</h2>
+            </div>
+            <div class="game-card">
+                <a href="{% url 'hissHunt' %}"><img src="{% static 'img/g1.png' %}" alt="Hiss & Hunt"></a>
+                <h2>Hiss & Hunt</h2>
+            </div>
+            <div class="game-card" onclick="openattackAliens()">
+                <img src="{% static 'img/g2.jpg' %}" alt="Attack Aliens">
+                <h2>Attack Aliens</h2>
+            </div>
+            <div class="game-card" onclick="openFastLane()">
+                <img src="{% static 'img/g3.jpg' %}" alt="Fast Lane">
+                <h2>Fast Lane</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function openSkyChaser() {
+            window.location.href = "{% url 'run_skychaser' %}";
+        }
+
+        function openFastLane() {
+            window.location.href = "{% url 'run_fastLane' %}";
+            
+        }
+
+        function openattackAliens() {
+            window.location.href = "{% url 'run_attackAliens' %}";
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector(".toggle-dark-mode");
+            icon.textContent = document.body.classList.contains("dark-mode") ? "☀" : "🌙";
+        }
+    </script>
+
+    <style>
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</body>
+
+</html>

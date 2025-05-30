@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Daygram</title>
+    <!-- Correct path to your static CSS file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'register_login.css' %}">
+</head>
+<body class="bg-gradient-to-r from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center" 
+style="background: url('{% static "img/log_reg.jpg" %}') no-repeat center center/cover; background-size: 100%; opacity: 20">
+    <div class="container d-flex justify-content-center align-items-center">
+        <h1 class="title">DAYGRAM</h1>
+        <div class="form-box">
+            <h2>Login</h2>
+            <hr>
+            <!-- Add action to specify where the form data should go -->
+            <form id="loginForm" method="POST" action="/login/">
+                {% csrf_token %}
+                
+                {% if messages %}
+                <div class="alert alert-primary" role="alert">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Username and Password Inputs -->
+                <input type="text" id="loginUsername" placeholder="Username *" required name="username">
+                <input type="password" id="loginPassword" placeholder="Password *" required name="password">
+                
+                <!-- Hidden input for next URL (where the user is trying to go) -->
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p>Don't have an account? <a href="/register/">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

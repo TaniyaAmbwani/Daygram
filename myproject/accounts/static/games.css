@@ -1,0 +1,336 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    background:  url('{% static "img/gv.mp4" %}'); /* Added background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    min-height: 100vh; /* Ensure it covers full height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* .light-mode .games-section {
+    background: linear-gradient(to bottom, #334e76, #191819);  Soft gradient 
+    padding: 30px;  Add spacing 
+    border-radius: 20px;  Optional rounded corners 
+    display: flex;
+    justify-content: center; Align content 
+} */
+
+.navbar, .welcome-section {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(to right, #526697, #71a094); /* Keep navbar color */
+}
+
+/* Add an extra wrapper around the main content to apply the background */
+/* .main-content {
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(to bottom, #284c72, #c0d8e8);  Your desired gradient 
+} */
+
+/* Light Mode */
+.light-mode {
+    background-color: #143e91;
+    color: #333;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #f3f4f6;
+}
+
+.brand {
+    font-family: 'Cursive', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(12, 0, 0);
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #dfe6f6, #ebf6f3);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 60px; /* Reduced height */
+    position: fixed; /* Changed from sticky to fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* Icon Styles for Navigation Links (Chatbot, Profile, Games, Post) */
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%; /* Circular icon */
+    object-fit: cover;
+    border: 2px solid rgb(7,0,0);
+    transition: transform 0.3s ease;
+}
+
+/* Make sure brand is on the left side */
+.navbar .brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+/* Home icon */
+.home-icon {
+    border: 2px solid rgb(7,0,0);
+    transition: transform 0.3s ease; 
+}
+
+/* Chatbot Icon */
+.chatbot-icon {
+    border: 2px solid rgb(7,0,0);
+    transition: transform 0.3s ease;
+}
+
+.profile-icon {
+    border: 2px solid rgb(7,0,0);
+    transition: transform 0.3s ease;
+}
+
+/* Moon Icon */
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;  /* Small space between moon and nav links */
+    transition: color 0.3s ease;
+}
+
+.toggle-dark-mode:hover {
+    color: #ffdf00; /* Gold color on hover */
+}
+
+/* Welcome Section Styling */
+.welcome-section {
+    text-align: center;
+    padding-top: 55px;
+    background: transparent;
+}
+
+/* Softer Neon Glow Effect for H1 */
+.welcome-section h1 {
+    font-size: 50px; /* Adjust as needed */
+    font-weight: bold;
+    color: #ff8c00; /* Warm orange */
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+
+    /* Softer Glow Effect */
+    text-shadow: 
+        0 0 5px rgba(255, 140, 0, 0.6), 
+        0 0 10px rgba(255, 140, 0, 0.5), 
+        0 0 15px rgba(255, 110, 0, 0.4);
+
+    animation: subtle-flicker 1.5s infinite alternate;
+}
+
+/* Subtle Flicker Animation */
+@keyframes subtle-flicker {
+    0% {
+        text-shadow: 
+            0 0 3px rgba(255, 140, 0, 0.6), 
+            0 0 6px rgba(255, 140, 0, 0.5), 
+            0 0 9px rgba(255, 110, 0, 0.4);
+    }
+    100% {
+        text-shadow: 
+            0 0 2px rgba(255, 140, 0, 0.6), 
+            0 0 5px rgba(255, 140, 0, 0.5), 
+            0 0 8px rgba(255, 110, 0, 0.4);
+    }
+}
+
+/* Styling for the description */
+.welcome-section p {
+    font-size: 18px;
+    color: #f1f0f0;
+    margin-left: 55px;
+}
+
+/* Dark Mode Styles for Welcome Section */
+.dark-mode .welcome-section {
+    background: #283551cb; /* Dark grey background */
+    border-bottom: 2px solid #444;
+}
+
+.dark-mode .welcome-section p {
+    color: #ffffff; /* White text */
+}
+
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Ensures 2 columns */
+    gap: 25px; /* Space between grid items */
+    justify-content: center; /* Centers the grid items */
+    align-items: center;
+    padding: 40px 5%;
+    max-width: 600px; /* Set a fixed max width for proper alignment */
+    margin: 0 auto; /* Centering the grid */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .games-grid {
+        grid-template-columns: 1fr; /* Single column for smaller screens */
+        max-width: 300px; /* Adjust width for small screens */
+    }
+}
+/* Game Cards - Modern Look */
+.game-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease-in-out;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    width: 300px; /* Reduce width */
+    height: 250px; /* Reduce height */
+}
+
+/* Hover Effect - Background Color Animation */
+.game-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.game-card:hover::before {
+    opacity: 1;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 5px 20px rgb(13, 230, 45);
+}
+
+/* Ensure text & images are above hover effect */
+.game-card img {
+    position: relative;
+    z-index: 1;
+}
+
+/* Game Title */
+.game-card h2 {
+    padding: 10px;
+    font-size: 22px;
+    color: white;
+    background: linear-gradient(to right, #8a106c, #71a094);
+    margin: 0;
+    border-radius: 5px;
+}
+
+.game-card img {
+    width: 95%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Dark Mode Styles */
+.dark-mode .game-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark-mode .game-card h2 {
+    background: linear-gradient(to right, #3d526e, #5f7f78);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        height: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;
+    }
+
+    .games-grid {
+        padding: 20px;
+        grid-template-columns: 1fr;
+    }
+}

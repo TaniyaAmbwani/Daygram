@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daygram - Share your moments, explore games, and connect with others.">
+    <title>Home - Daygram</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/d278e16513.js" crossorigin="anonymous"></script>
+    <style>
+        .post-username {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background-color: #526697;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .post-image, .post-video {
+            width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .post-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .post-actions button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .comment-section {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen"
+style="background: url('{% static "img/home_bg.jpg" %}') no-repeat center center/cover; opacity: 20">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="left-section">
+            <img src="{% static 'img/l7.jpeg' %}" alt="Daygram Logo" class="logo">
+            <span class="brand-name">DAYGRAM</span>
+        </div>
+
+        <div class="right-section">
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}"><img src="{% static '/img/home6.jpg' %}" alt="Post" class="nav-icon home-icon"></a></li>
+                <li><a href="https://asheetidemo.github.io/chatbot-a/"><img src="{% static 'img/bot.jpeg' %}" alt="Chatbot" class="nav-icon chatbot-icon" name="chatbot"></a></li>
+                <li><a href="{% url 'games' %}"><img src="{% static 'img/games.jpeg' %}" alt="Games" class="nav-icon games-icon" name="games"></a></li>
+                <li><a href="{% url 'post' %}"><img src="{% static 'img/post.jpeg' %}" alt="Post" class="nav-icon post-icon" name="post"></a></li>
+                <li><a href="{% url 'search' %}"><img src="{% static 'img/search.jpeg' %}" alt="Search" class="nav-icon search-icon" name="search"></a></li>
+                <li><a href="{% url 'profile' user.id %}">
+                    <img src="{% static 'img/profile.jpeg' %}" alt="Profile" class="nav-icon profile-icon" name="profile">
+                </a></li>
+            </ul>
+            <!-- <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button> -->
+        </div>
+    </nav>
+
+    <!-- Welcome Section -->
+    <h3 style:h3 {
+        font-size: 26px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+    }>LET'S BROWSE </h3>
+
+    <!-- Post Feed -->
+    <div class="container">
+        <div id="postFeed" class="post-container">
+            {% for post in posts %}
+            <div class="post">
+                <!-- Display Username -->
+                <div class="post-username">
+                    <a href="{% url 'profile' post.user_profile.id %}" style="color: white; text-decoration: none;">
+                        {{ post.user_profile.username }}
+                    </a>
+                </div>
+
+                <!-- Display Media -->
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+                {% elif post.video %}
+                <video class="post-video" controls>
+                    <source src="{{ post.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+
+                <!-- Display Caption -->
+                <p class="post-caption">{{ post.caption }}</p>
+
+                <!-- Display Category -->
+                {% if post.image or post.video %}
+                <p class="post-category">Category: {{ post.category }}</p>
+                {% endif %}
+
+                <!-- Like, Comment, and Save Buttons -->
+                <div class="post-actions">
+                    <button id="like-btn-{{ post.id }}" onclick="likePost({{ post.id }})">
+                        <i id="like-icon-{{ post.id }}" class="fa-regular fa-heart"></i>
+                        <span id="like-count-{{ post.id }}">{{ post.likes.count }}</span>
+                    </button>
+                    <button class="comment-btn" onclick="toggleComments({{ post.id }})">
+                        💬 Comments
+                    </button>
+                    <button class="save-btn" onclick="savePost({{ post.id }})" id="save-btn-{{ post.id }}">
+                        🏷️ Save
+                    </button>
+                    
+                </div>
+
+                <!-- Comment Section -->
+                <div class="comment-section" id="comments-{{ post.id }}" style="display: none;">
+                    <input type="text" id="comment-input-{{ post.id }}" placeholder="Write a comment...">
+                    <!-- <button onclick="addComment({{ post.id }})">Post</button> -->
+                    <div id="comment-list-{{ post.id }}">
+                        {% for comment in post.comments.all %}
+                        <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No posts yet. Follow users to see their posts!</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function savePost(postId) {
+    const saveButton = document.getElementById(`save-btn-${postId}`);
+    
+    // Disable the button to prevent multiple clicks
+    saveButton.disabled = true;
+
+    fetch(`/save/${postId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.saved) {
+            saveButton.innerText = '✅ Saved';
+            alert("Post saved!");
+        } else {
+            saveButton.innerText = '🔖 Save';
+            alert("Post unsaved!");
+        }
+
+        // Re-enable the button after the request completes
+        saveButton.disabled = false;
+    })
+    .catch(error => {
+        console.error('Error saving post:', error);
+        saveButton.disabled = false;  // Re-enable in case of an error
+    });
+}
+
+
+    //     function addComment(postId) {
+    //     const commentInput = document.getElementById(`comment-input-${postId}`);
+    //     const commentText = commentInput.value.trim();
+
+    //     if (commentText === "") {
+    //         alert("Please enter a comment!");
+    //         return;
+    //     }
+
+    //     // Create a new comment element
+    //     const commentList = document.getElementById(`comment-list-${postId}`);
+    //     const newComment = document.createElement("p");
+    //     newComment.innerHTML = `<strong>You:</strong> ${commentText}`;
+        
+    //     // Append new comment to the list
+    //     commentList.appendChild(newComment);
+
+    //     // Clear input field after adding the comment
+    //     commentInput.value = "";
+    // }
+
+    // function toggleComments(postId) {
+    //     const commentSection = document.getElementById(`comments-${postId}`);
+        
+    //     if (commentSection.style.display === "none" || commentSection.style.display === "") {
+    //         commentSection.style.display = "block";
+    //     } else {
+    //         commentSection.style.display = "none";
+    //     }
+    // }
+    function addComment(postId) {
+        const commentInput = document.getElementById(`comment-input-${postId}`);
+        const commentText = commentInput.value.trim();
+        if (commentText === "") {
+            alert("Please enter a comment!");
+            return;
+        }
+        const commentList = document.getElementById(`comment-list-${postId}`);
+        const newComment = document.createElement("p");
+        newComment.innerHTML = `<strong>You:</strong> ${commentText}`;
+        commentList.appendChild(newComment);
+        commentInput.value = "";
+    }
+    
+    function toggleComments(postId) {
+        const commentSection = document.getElementById(`comments-${postId}`);
+        commentSection.style.display = (commentSection.style.display === "none" || commentSection.style.display === "") ? "block" : "none";
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("[id^=comment-input-]").forEach(input => {
+            input.addEventListener("keypress", function (event) {
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    const postId = this.id.split("-")[2];
+                    addComment(postId);
+                }
+            });
+        });
+    });
+    function likePost(postId) {
+        const likeCountElement = document.getElementById(`like-count-${postId}`);
+        let currentLikes = parseInt(likeCountElement.innerText) || 0; 
+
+        if (likeCountElement.dataset.liked === "true") {
+            likeCountElement.innerText = currentLikes - 1;
+            likeCountElement.dataset.liked = "false";
+        } else {
+            likeCountElement.innerText = currentLikes + 1;
+            likeCountElement.dataset.liked = "true";
+        }
+    }
+//     function likePost(postId) {
+//     const likeCountElement = document.getElementById(`like-count-${postId}`);
+    
+//     // Ensure like count starts at 0 if it's not set
+//     let currentLikes = parseInt(likeCountElement.innerText) || 0; 
+
+//     fetch(`/like/${postId}/`, { 
+//         method: "POST",
+//         headers: { 
+//             "Content-Type": "application/json",
+//             "X-CSRFToken": "{{ csrf_token }}"
+//         }
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.success) {
+//             likeCountElement.innerText = data.likes; // Update count dynamically
+//         } else {
+//             alert("Something went wrong! Please try again.");
+//         }
+//     })
+//     .catch(error => console.error("Error:", error));
+// }
+
+//     function updateLike(postId) {
+//     fetch(`/like/${postId}/`, { 
+//         method: "POST", 
+//         headers: { 
+//             "Content-Type": "application/json",
+//             "X-CSRFToken": "{{ csrf_token }}" // Ensure CSRF token is included
+//         }
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.success) {
+//             document.getElementById(`like-count-${postId}`).innerText = data.likes;
+//         } else {
+//             alert("Something went wrong! Please try again.");
+//         }
+//     })
+//     .catch(error => console.error("Error:", error));
+// }
+
+// // Like button function
+// function likePost(postId) {
+//     updateLike(postId);
+// }
+
+    </script>
+
+</body>
+</html>

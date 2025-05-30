@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Daygram</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'register_login.css' %}">
+</head>
+<body class="bg-gradient-to-r from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center" 
+style="background: url('{% static "img/log_reg.jpg" %}') no-repeat center center/cover;">
+
+    <div class="container">
+        <h1 class="title">DAYGRAM</h1>
+        <div class="form-box">
+            <h2>Sign Up</h2>
+            <hr>
+            <form id="registerForm"  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if messages %}
+                <div class="alert alert-primary" role="alert">
+                    {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <input type="text" id="name" placeholder="Full Name" name="name">
+                <input type="text" id="username" placeholder="Username *" name="username" required>
+                <input type="email" id="email" placeholder="Email *" name="email" required>
+                <input type="text" id="mobile" placeholder="Mobile No" name="mobile">
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="password" id="password" placeholder="Password *" name="password" required>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <p>already have an account? <a href="/login/">Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

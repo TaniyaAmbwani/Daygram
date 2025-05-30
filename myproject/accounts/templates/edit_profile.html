@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daygram - Edit Profile">
+    <title>Edit Profile - Daygram</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <script src="https://kit.fontawesome.com/d278e16513.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen"
+style="background: url('{% static "img/editpbg.jpg" %}') no-repeat center center/cover; opacity: 20">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="left-section">
+            <img src="{% static 'img/l7.jpeg' %}" alt="Daygram Logo" class="logo">
+            <span class="brand-name">DAYGRAM</span>
+        </div>
+
+        <div class="right-section">
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}"><img src="{% static 'img/home6.jpg' %}" alt="Home" class="nav-icon home-icon"></a></li>
+                <li><a href="{% url 'games' %}"><img src="{% static 'img/games.jpeg' %}" alt="Games" class="nav-icon games-icon"></a></li>
+                <li><a href="{% url 'post' %}"><img src="{% static 'img/post.jpeg' %}" alt="Post" class="nav-icon post-icon"></a></li>
+                <li><a href="{% url 'search' %}"><img src="{% static 'img/search.jpeg' %}" alt="Search" class="nav-icon search-icon"></a></li>
+                <li><a href="{% url 'profile' user.id %}"><img src="{% static 'img/profile.jpeg' %}" alt="Profile" class="nav-icon profile-icon"></a></li>
+
+            </ul>
+            {% comment %} <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button> {% endcomment %}
+        </div>
+    </nav>
+
+    <!-- Edit Profile Section -->
+    <div class="edit-profile-container">
+        <h2>Edit Profile</h2>
+
+        <div class="profile-preview">
+            <img id="profile-pic-preview" 
+                 src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'img/profile_default.jpg' %}{% endif %}" 
+                 alt="Profile Picture" class="profile-pic">
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="edit-profile-form">
+            {% csrf_token %}
+
+            <label for="id_name">Full Name:</label>
+            {{ form.name }}
+
+            <label for="id_gender">Gender:</label>
+            {{ form.gender }}
+
+            <label for="id_mobile">Mobile:</label>
+            {{ form.mobile }}
+
+            <label for="id_profile_pic">Profile Picture:</label>
+            {{ form.profile_pic }}
+
+            <h4>Change Password</h4>
+            {{ password_form.as_p }}  <!-- ✅ This correctly includes all password fields -->
+
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+
+        <a href="{% url 'profile' user.id %}" class="cancel-btn">Cancel</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Dark Mode & JavaScript -->
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector(".toggle-dark-mode");
+            icon.textContent = document.body.classList.contains("dark-mode") ? "☀" : "🌙";
+        }
+    </script>
+
+    <!-- Style (Matches Daygram Aesthetic) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .edit-profile-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+        ul.errorlist {
+            display: none; /* Hides the error messages */
+        }
+        .nav-icon {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgb(7,0,0);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-preview img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .edit-profile-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .edit-profile-form input, .edit-profile-form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .save-btn, .cancel-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background-color:rgb(42, 66, 119);
+            color: white;
+        }
+
+        .cancel-btn {
+            background-color: #ccc;
+            text-decoration: none;
+            color: black;
+        }
+
+        .save-btn:hover {
+            background-color:rgb(45, 52, 101);
+        }
+
+        .cancel-btn:hover {
+            background-color: #999;
+        }
+    </style>
+
+</body>
+</html>

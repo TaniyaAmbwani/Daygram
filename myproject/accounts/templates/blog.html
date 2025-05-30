@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Blog - Daygram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    {% load static %}
+    <style>
+ /* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #dfe6f6, #ebf6f3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+}
+ 
+.brand-name {
+    font-family: 'Cursive', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(12, 0, 0);
+}
+
+/* Right Section */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    color: rgb(9, 0, 0);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #070707;
+}
+
+/* Updated Navigation Icon Style */
+
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgb(7, 0, 0);
+    transition: transform 0.3s ease;
+}
+.nav-icon:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Hover shadow effect */
+}
+
+/* Dark Mode Toggle Button */
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-dark-mode:hover {
+    transform: scale(1.2);
+}
+
+.btn-hover:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 0 20px rgba(235, 115, 173, 0.6), 0 0 40px rgba(235, 115, 173, 0.6), 0 0 60px rgba(235, 115, 173, 0.6);
+}
+
+</style>
+</head>
+<body class="bg-gradient-to-r from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center" 
+style="background: url('{% static "img/videoblog.gif" %}') no-repeat center center/cover; background-size: 100%; opacity: 20">
+ <!-- Navbar -->
+ <nav class="navbar">
+    <div class="left-section">
+        <img src="{% static 'img/l7.jpeg' %}" alt="Daygram Logo" class="logo">
+        <span class="brand-name">DAYGRAM</span>
+    </div>
+
+    <div class="right-section">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}"><img src="{% static '/img/home6.jpg' %}" alt="Post" class="nav-icon home-icon"></a></li>
+            <li><a href="https://asheetidemo.github.io/chatbot-a/"><img src="{% static 'img/bot.jpeg' %}" alt="Chatbot" class="nav-icon chatbot-icon" name="chatbot"></a></li>
+            <li><a href="{% url 'post' %}"><img src="{% static 'img/post.jpeg' %}" alt="Post" class="nav-icon post-icon" name="post"></a></li>
+            <li><a href="{% url 'search' %}"><img src="{% static 'img/search.jpeg' %}" alt="Search" class="nav-icon search-icon" name="search"></a></li>
+            <li><a href="{% url 'profile' user.id %}"><img src="{% static 'img/profile.jpeg' %}" alt="Profile" class="nav-icon profile-icon" name="profile"></a></li>
+            
+        </ul>
+        <!-- Dark Mode Toggle -->
+        <!-- <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button> -->
+    </div>
+</nav>
+
+    
+
+    <!-- Container -->
+    <div class="w-full max-w-4xl p-12 bg-white shadow-xl rounded-2xl transform transition-all hover:scale-105 flex flex-col justify-center">
+        <!-- Blog Form Card -->
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Create Blog</h2>
+        <!-- Blog Form -->
+        <form id="postForm" method="post" class="space-y-4">
+            {% csrf_token %}
+            <!-- Caption Input -->
+            <div>
+                <label class="block text-gray-700 text-sm font-semibold" for="caption">Pour your heart out..</label>
+                <textarea 
+                    class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none transition-all duration-200" 
+                    id="caption" 
+                    placeholder="Give your thoughts💭..." 
+                    rows="6" 
+                    name="Caption" 
+                    required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="w-full bg-[#BE6674] text-white py-2 rounded-lg btn-hover" type="submit">
+                <i class="fas fa-paper-plane mr-2"></i>Share
+            </button>
+        </form>
+    </div>
+
+    <!-- <script>
+        function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const icon = document.querySelector(".toggle-dark-mode");
+    icon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }        
+    </script> -->
+
+</body>  
+</html>

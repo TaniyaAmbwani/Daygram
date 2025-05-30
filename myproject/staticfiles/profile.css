@@ -1,0 +1,256 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Styling */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #f5f5f5;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #526697, #71a094);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.brand-name {
+    font-family: cursive;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #c4e5d6;
+}
+
+/* Dark Mode Toggle Button */
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+    color: white;
+}
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%; /* Circular icon */
+    object-fit: cover;
+    border: 2px solid white; /* Adds a border like Instagram */
+}
+.home-icon {
+    border: 2px solid #8C9B8F ; /* Adds a border like Instagram */
+}
+
+/* Chatbot Icon */
+.chatbot-icon {
+    border: 2px solid #8C9B8F ; /* Adds a border like Instagram */
+}
+
+/* Profile Icon */
+.search-icon {
+    border: 2px solid #7B8A7F; /* Adds a border like Instagram */
+}
+
+/* Games Icon */
+.games-icon {
+    border: 2px solid #7B8A7F; /* Adds a border like Instagram */
+}
+
+/* Post Icon */
+.post-icon {
+    border: 2px solid #7B8A7F; /* Adds a border like Instagram */
+}
+
+
+.toggle-dark-mode:hover {
+    transform: scale(1.1);
+}
+
+/* Profile Header Section */
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #71a094; /* Navbar color separator */
+    margin-bottom: 20px;
+}
+
+body.dark-mode .profile-header {
+    background-color: #333;
+    border-bottom: 2px solid #4e8d7c;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-pic {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4e8d7c;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.follow-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.follow-btn {
+    background-color: #516085;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.follow-btn:hover {
+    background-color: #4e6861;
+    ;
+}
+
+body.dark-mode .follow-btn {
+    background-color: #58678c;
+}
+
+body.dark-mode .follow-btn:hover {
+    background-color:#60756f ;
+}
+
+/* Tabs Section */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.tab-btn {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    border: none;
+    background: none;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #4e6861;
+    border-bottom: 2px solid #4e8d7c;
+}
+
+body.dark-mode .tab-btn {
+    color: #f5f5f5;
+}
+
+body.dark-mode .tab-btn:hover {
+    color: #607570;
+    border-bottom: 2px solid #71a094;
+}
+
+/* Post Section Styling */
+.post-section {
+    padding: 20px;
+}
+
+.post-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .post-card {
+    background-color: #333;
+    color: #f5f5f5;
+}

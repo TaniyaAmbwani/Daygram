@@ -1,0 +1,347 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #f5f5f5;
+}
+
+/* Body and Parent Container */
+body {
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #526697, #71a094);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px; /* Adjusted padding for better spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #3d5285;
+    object-fit: cover;
+}
+
+.brand-name {
+    font-family: 'Cursive', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Right Section */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #cce7e3;
+}
+
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    transition: transform 0.3s ease;
+}
+
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Dark Mode Toggle Button */
+.toggle-dark-mode {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-dark-mode:hover {
+    transform: scale(1.2);
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    background: linear-gradient(to right, #526697, #71a094);
+    color: white;
+    padding: 50px 20px;
+    margin-top: 70px; /* Adjust spacing to align with navbar */
+}
+
+.welcome-section h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 18px;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+/* Post Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 600px;
+}
+
+/* Post Card */
+.post-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Mode Post Card */
+body.dark-mode .post-card {
+    background-color: #333;
+    color: #f5f5f5;
+}
+
+/* Post Image Styling */
+.post-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+/* Like & Save Buttons */
+.like-btn, .save-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: gray;
+    transition: color 0.3s, transform 0.3s ease;
+}
+
+.like-btn:hover, .save-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Liked State for the Like Button */
+.liked {
+    color: pink;
+}
+
+/* Saved State for the Save Button */
+.saved {
+    color: blue;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-icon {
+        height: 35px;
+        width: 35px;
+    }
+
+    .welcome-section h1 {
+        font-size: 28px;
+    }
+
+    .welcome-section p {
+        font-size: 16px;
+    }
+
+    .post-card {
+        padding: 15px;
+    }
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-icon {
+        height: 35px;
+        width: 35px;
+    }
+
+    .welcome-section h1 {
+        font-size: 28px;
+    }
+
+    .welcome-section p {
+        font-size: 16px;
+    }
+
+    .post-card {
+        padding: 15px;
+    }
+}
+
+
+
+/* Home */
+
+
+/* Reset Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f8fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%; /* Ensure the container takes up full width up to max-width */
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #526697;
+    margin-bottom: 20px;
+    text-align: left; /* Align title to the left */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    text-align: left; /* Align labels to the left */
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    text-align: left; /* Align input text to the left */
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #526697;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(82, 102, 151, 0.2);
+}
+
+textarea {
+    resize: none; /* Prevent resizing */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #526697;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Align button text to the left */
+}
+
+button:hover {
+    background-color: #41557f;
+    transform: scale(1.02);
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daygram - Profile Page">
+    <title>Profile - Daygram</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <script src="https://kit.fontawesome.com/d278e16513.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen"
+style="background: url('{% static "img/profilebg.jpg" %}') no-repeat center center/cover; opacity: 20">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="left-section">
+            <img src="{% static 'img/l7.jpeg' %}" alt="Daygram Logo" class="logo">
+            <span class="brand-name">DAYGRAM</span>
+        </div>
+
+        <div class="right-section">
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}"><img src="{% static 'img/home6.jpg' %}" alt="Home" class="nav-icon"></a></li>
+                <li><a href="https://asheetidemo.github.io/chatbot-a/"><img src="{% static 'img/bot.jpeg' %}" alt="Chatbot" class="nav-icon " name="chatbot"></a></li>
+                <li><a href="{% url 'games' %}"><img src="{% static 'img/games.jpeg' %}" alt="Games" class="nav-icon"></a></li>
+                <li><a href="{% url 'post' %}"><img src="{% static 'img/post.jpeg' %}" alt="Post" class="nav-icon"></a></li>
+                <li><a href="{% url 'search' %}"><img src="{% static 'img/search.jpeg' %}" alt="Search" class="nav-icon"></a></li>
+                <li><a href="{% url 'profile' user.id %}"><img src="{% static 'img/profile.jpeg' %}" alt="Profile" class="nav-icon profile-icon"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-header">
+            <img src="{% if user_profile.profile_pic %}{{ user_profile.profile_pic.url }}{% else %}{% static 'img/profile_default.jpg' %}{% endif %}" 
+            alt="Profile Picture" class="profile-pic">            
+            <div class="profile-info">   
+                <h2 class="username">{{ user_profile.username }}</h2>
+                <div class="follow-buttons">
+                    <!-- Follow button -->
+                    <button class="follow-btn" id="follow-btn-{{ user_profile.id }}" onclick="followUser({{ user_profile.id }})">
+                        Followers <span id="followers-count-{{ user_profile.id }}">{{ user_profile.get_followers_count }}</span>
+                    </button>
+                    <button class="follow-btn">Following {{ user_profile.get_following_count }}</button>
+                    <button class="settings-btn" onclick="openSettings(event)">⚙️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts and Saved Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab(event, 'posts')">Posts</button>
+            <button class="tab-btn" onclick="showTab(event, 'saved')">Saved</button>
+        </div>
+
+        <!-- Content Section -->
+        <div id="posts" class="tab-content">
+            {% if user_posts %}
+                {% for post in user_posts %}
+                    <div class="post-card">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+                        {% elif post.video %}
+                            <video class="post-video" controls>
+                                <source src="{{ post.video.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% endif %}
+                        <p>{{ post.caption }}</p>
+                        <p class="post-category">Category: {{ post.category }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Saved Posts -->
+        <div id="saved" class="tab-content" style="display: none;">
+            {% if saved_posts %}
+                {% for post in saved_posts %}
+                    <div class="post-card">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="Saved Post Image" class="post-image">
+                        {% elif post.video %}
+                            <video class="post-video" controls>
+                                <source src="{{ post.video.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% endif %}
+                        <p>{{ post.caption }}</p>
+                        <p class="post-category">Category: {{ post.category }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No saved posts yet.</p>
+            {% endif %}
+        </div>
+
+    </section>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSettings()">&times;</span>
+            <h2>Settings</h2>
+            <div class="settings-option"><button onclick="editProfile()">Edit Profile</button></div>
+            <hr>
+            <a href = '{% url "login_page" %}'><div class="settings-option"><button onclick="logout()">Logout</button></div></a>
+            <hr>
+            <div class="settings-option"><button onclick="closeSettings()">Cancel</button></div>
+        </div>
+    </div>
+
+    <script>
+        function openSettings(event) {
+            var modal = document.getElementById("settingsModal");
+            var btn = event.currentTarget;
+
+            var rect = btn.getBoundingClientRect();
+
+            modal.style.display = "block";
+            modal.style.position = "absolute";
+            modal.style.top = rect.top + window.scrollY + "px";
+            modal.style.left = rect.right + 10 + "px";
+        }
+
+        function closeSettings() {
+            document.getElementById("settingsModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("settingsModal");
+            var button = document.querySelector(".settings-btn");
+
+            if (event.target !== modal && event.target !== button && !modal.contains(event.target)) {
+                closeSettings();
+            }
+        };
+
+        function editProfile() {
+            window.location.href = "{% url 'edit_profile' %}";
+        }
+
+        function logout() {
+            closeSettings();
+        }
+
+        function followUser(userId) {
+            const followButton = document.getElementById(`follow-btn-${userId}`);
+            const followerCount = document.getElementById(`followers-count-${userId}`);
+            
+            // Disable the button to prevent multiple clicks
+            followButton.disabled = true;
+
+            fetch(`/follow/${userId}/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.followed) {
+                    followButton.innerText = 'Following';
+                } else {
+                    followButton.innerText = 'Follow';
+                }
+                followerCount.innerText = data.followers_count;  // Update follower count
+                followButton.disabled = false;  // Re-enable button after response
+            })
+            .catch(error => {
+                console.error('Error following user:', error);
+                followButton.disabled = false;  // Re-enable button in case of error
+            });
+        }
+    </script>
+
+</body>
+</html>
